@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+/* Write a C program that will accept data of a day then print out whether they are valid or not. 
+
+	IPO
+	
+	I:	nhập vào ngày tháng định dạng dd/mm/yyyy.
+	
+	P:	viết 1 hàm để tính ngày xem đúng hay sai
+	
+	O: 	ngày được nhập vào có hiệu lực hay là không.
+
+*/
+
+int validDate(int d, int m, int y){
+	
+		
+	bool valid;									
+	
+	if (d < 1 || d > 31 || m < 1 || m > 12)
+		valid = 0;
+	else if ((d >= 1 && d <= 31) &	(m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12)) 
+		// nếu như là tháng 1, 3, 5, 7, 8, 10, 12 thì tối đa phải là 31 ngày.
+		valid = 1;
+	else if ((d >= 1 && d <= 30) &	(m == 4 || m == 6 || m == 9 || m == 11))
+		// nếu như là tháng 4, 6, 9, 11 thì tối đa chỉ có 30 ngày
+		valid = 1;
+	else if (m == 2)	// tùy vào năm nhuận hay không thì sẽ có 29 hoặc 28 ngày.
+		{
+			if(y % 400 == 0 || ( y % 4 == 0 && y % 100 != 0))
+				if(d >= 1 && d <= 29)
+					valid = 1;
+			else if (d >= 1 && d <= 28)
+				valid = 1;
+		}
+	else valid = 0;
+	
+	return valid;	
+}
+
+
+int main(int argc, char *argv[]) {
+	
+	int d, m, y;
+	printf("We are here to help you check if the date is valid or not!!!\n");
+	do
+	{
+		printf("Please input the date in format dd/mm/yyyy: ");
+		scanf("%d/%d/%d", &d, &m, &y);
+		
+		if (d == 0 || m == 0 || y == 0)
+			printf("Sorry please input the right number format!!!!!\n\n");
+		else break;
+		fflush(stdin);
+	} while (5 < 6);
+	
+	
+	
+	if(validDate(d, m, y))			// mặc định khi dùng if không có điều kiện ~~ validDate nó là true, tức là 1
+									// nếu ghi điều kiện thì nó theo điều kiện đó
+		printf("\nCongratulation, the date is valid!!!!\n");
+	else 
+		printf("Sorry, the date you have inputed is invalid!!!!\n");
+	
+	return 0;
+}
