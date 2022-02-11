@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <stdbool.h>
+
+// Write a C that will accept a positive integer
+//	n, n>=2 then print out primes between 2 and n.
+// IPO
+
+// I: cần nhập vào số để tìm tất cả primes ở giữa
+
+// P: lập 1 hàm tìm prime để chứng minh primes.
+
+//	
+
+// O: in ra tất cả các primes từ 1 -> n
+
+
+int prime(int a){
+	
+	bool check = 1;
+	for (int i = 2; i <= sqrt(a); i++)
+	{
+		if (a % i == 0)
+		{
+			check = 0;
+			break;
+		}
+		else check = 1;
+			
+	}
+	return check;
+}
+
+
+int main(int argc, char *argv[]) {
+	
+	int n;
+	
+	printf("Welcome to our world of calculation!!!\n");
+	printf("Today let us find your primes between 1 to n for you!!!\n");
+	do
+	{	
+		printf("Please input number n > 1: ");
+		scanf("%d", &n);
+				
+		if (n <= 1)
+			printf("Do you know how to input number n > 1?\n");
+		else
+			break;
+		
+		fflush(stdin);
+	} while (4 > 3);
+	
+	if (n == 2)
+	printf("There are no prime between 1 and 2.\n");
+	
+	printf("\nThis is number sequence of prime between 1 and %d: \n", n);
+
+
+
+	for (int i = 2; i < n; i++)
+	{
+		if (prime(i) == 1)
+			printf("%d ", i);
+	}
+
+	
+	return 0;
+}
