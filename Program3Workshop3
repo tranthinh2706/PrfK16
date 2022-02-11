@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+/* Write a C program that will accept a point and a circle having the center is (0,0)
+	then print out the relative position of this point with the circle.
+	
+	IPO
+	I: cần nhập vào bán kính, tọa độ của điểm M
+	
+	P: tạo 1 hàm tính công thức khoảng cách từ điểm M tới tâm (0,0) của đường tròn để biết được
+		M nằm ở đâu so với đường tròn.
+	
+	O: báo rằng điểm M nằm trong/trên/ngoài đường tròn tâm là (0,0)
+
+
+*/
+
+
+double getRelPos(double x, double y, double R)
+{
+	double d2 = x*x + y*y;
+	double R2 = R*R;
+	
+	if (d2 < R2)
+		return 0;	// về 0 tức là điểm M nằm trong đường tròn
+	else if (d2 == R2)
+		return 1;	// về 1 tức là điểm M nằm trên đường tròn
+	else 
+		return 2;	// còn lại là điểm M nằm ngoài đường tròn
+	
+}
+
+
+
+int main(int argc, char *argv[]) {
+	
+	double x, y, R;
+	
+	printf("We will help you to find out the relative position of 1 point with the circle has a center is (0,0)!!!");
+	printf("Please input the coordinates of the point M(x,y): ");
+	scanf("%lf,%lf", &x, &y);
+	
+	while (3 < 4)
+	{
+		printf("Please input the radius R > 0: ");
+		scanf("%lf", &R);
+		
+		if (R < 0)
+			printf("You don't know how to input positive radius value, do you???\n");
+		else
+			break;
+	}
+	
+	if (getRelPos(x, y, R) == 0)
+		printf("The point M(%.2lf, %.2lf) is in the circle has a center (0,0) with radius R = %.2lf", x, y, R);
+	else if (getRelPos(x, y, R) == 1)
+		printf("The point M(%.2lf, %.2lf) is on the circle has a center (0,0) with radius R = %.2lf", x, y, R);
+	else
+		printf("The point M(%.2lf, %.2lf) is outside of the circle has a center (0,0) with radius R = %.2lf", x, y, R);
+	
+	
+	
+	return 0;
+}
