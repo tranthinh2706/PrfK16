@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+
+/* Write a C program that will accept a positive integer then print out its factorial
+		
+		IPO
+		I: cần nhập vào n để tìm được giai thừa của n
+		
+		P: dùng vòng lặp để nhân vào giá trị tăng dần của i
+		
+		O: cần in ra màn hình kết quả giai thừa của n.
+
+ */
+
+long factorial(int n)
+{
+   long f = 1;
+   
+   for (int i = 2; i <= n; i++)
+   {
+   		f *= i;
+   }
+   
+   return f;
+   
+}
+
+int main(int argc, char *argv[]) {
+	
+	int n;
+	printf("Let us help you find out the value of factorial of n.\n");
+	for (;;)
+	{
+		printf("Please input n > 0: ");
+		scanf("%d", &n);
+		
+		if (n < 1)
+			printf("Please input the right number n > 0!!!\n");
+		else
+			break;
+		fflush(stdin);
+		
+	}
+	
+	printf("The factorial of %d is %ld.", n, factorial(n));
+	
+	return 0;
+}
