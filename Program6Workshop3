@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+/* Write a C program that will accept a positive integer then print out whether
+it is an element of the Fibonacci sequence or not. */
+
+int checkFibonacci (int n)
+{
+	int x = 0, y = 1, f = 1;
+	if (n == 1)
+		return 1;
+	else
+	{
+		for (;;)
+		{
+			f = x + y;
+			x = y;
+			y = f;
+			
+			if (f >= n)
+				break;
+		}
+		
+		if (n == f)
+			return 1;
+		else
+			return 0;
+	}
+	
+}
+
+
+int main(int argc, char *argv[]) {
+	
+	int n;
+	printf("This program will show you if a number belong to fibonacci sentence or not.\n");
+	
+	while (3 < 4)
+	{
+	printf("Input the number n > 1: ");
+	scanf("%d", &n);
+	
+	if (n <= 1)
+		printf("Don't you know how to input the right format n > 1!!!\n");
+	else
+		break;
+	
+	}
+	
+	if (checkFibonacci(n))
+		printf("Your number you have inputted is in fibonacci sentence.");
+	else
+		printf("Sorry, you number isn't belong to fibonacci sentence!!!");
+		
+	
+	return 0;
+}
