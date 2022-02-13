@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+/* Write a C program that will carry out some times.
+	In each time, a nonnegative integer is accepted then print out the sum of its decimal digits.
+	The program will terminate when its value of accepted number is negative.
+	
+	
+	
+
+ */
+
+int sumDigits (int n)
+{
+	int sum = 0;
+	
+	for (int digits = 1; n > 0;  sum += digits)
+	{
+		digits = n % 10;
+		n = n / 10;
+		
+	}
+	return sum;
+}
+
+
+
+int main(int argc, char *argv[]) {
+	
+	int n;
+	printf("Hello, we are here to help you calculate the sum of decimal digit of numbers.\n");
+	
+	
+	do
+	{
+		
+		printf("Please input the number n > 0 until you input negative number to stop calculation: ");
+		scanf("%d", &n);
+		
+		if (n > 0)
+			printf("The summarize of decimal digit of %d is %d\n", n, sumDigits(n));
+		
+	} while (n > 0);
+	if (n < 0)
+		printf("Thank you for using this program, hope this will help you. Best wishes!!!");
+	
+	return 0;
+}	
