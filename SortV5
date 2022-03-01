@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char *argv[]) {
+	
+	int a[] = {50, 10, 100, -50, 1000, -50, 1, -1001};
+	int t;
+	
+	for (int pos = 0; pos < 8; pos++)
+		for (int i = pos + 1; i < 8; i++)
+			if (a[pos] > a[i]) {
+			
+				t = a[pos]; // 50
+				a[pos] = a[i]; // 10
+				a[i] = t; // 50
+				//break; 
+			}
+
+	printf("After swapping the min value, the array now is\n");
+	for (int i = 0; i < 8; i++)
+		printf("%d ", a[i]);
+		
+	
+	return 0;
+}
