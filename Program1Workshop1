@@ -1,0 +1,184 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+/* Write a C program that will execute repetitively using a simple menu as following: 
+
+1-	Process primes
+2-	Print min, max digit in an integer;
+3-	Quit
+Select an operation:
+
+1-	When user selects the option 1, the program will accept a positive integral number and print out a message about whether the input number  is a prime or not.
+2-	When user selects the option 2, the program will accept a positive integral number and print out the minimum and maximum digit in this number.
+3-	The program will terminate when user selects the option
+
+
+IPO:
+	I: cần bao nhiêu hàm: (in menu, hàm check số ngt, in ra giá trị min, max của integer), khai báo biến 
+	P: cái menu này, cần dùng loại phép tính gì?
+	
+	O: in ra màn hình có phải là prime, ....
+	
+	
+	Check prime thì làm gì trước: số ngt là 1 số chỉ có 2 Ước số duy nhất là nó và 1. số nguyên tố này bắt đàu từ 2.
+	Nếu như gặp 1 thằng i != 1 và nó mà n % i == 0 thì nó không phải là số nguyên tố.
+	Nếu như i gần sát với lại thằng n quá thì i % n != 0
+	ước chung bé nhất nên là bao nhiêu <= căn bậc 2 của n
+	
+	
+	MinMaxDigit
+		IPO: 
+		I:	cần nhập vào 1 số n (đã có khai báo rồi)
+		P: viết 1 hàm để xuất ra màn hình min/max(ưu tiên void, nếu cần trả về giá trị thì phải đụng tới khái niệm gọi là mảng)
+		
+		O: 
+
+*/
+
+void printMenu();
+void checkPrime();
+int isPrime(int n);
+void processMinMaxDigit();
+
+
+
+int main(int argc, char *argv[]) {
+	
+	int choice;
+	
+	
+	do				
+	{
+	
+		do{
+			printMenu();
+			printf("Please choose the option from 1 to 3: ");
+			scanf("%d", &choice);
+			fflush(stdin);		// xóa bộ nhớ đệm bàn phím. sẽ xóa rác còn tồn lại ở trong bộ đệm bàn phím sau khi scan ở trên.
+								// còn kí tự "\n" là nó cứ enter hoài luôn
+			if (choice < 1 || choice > 3)		// vì 1 số n không thể vừa lớn 3 vừa nhỏ hơn 1
+				printf("Please input the right value from 1 to 3!!!\n");	
+			else 
+				break;
+			
+		}	while (3 < 4);
+		
+		if (choice == 3)
+			printf("Thank you for trusting and using our app!!!!");
+		
+		switch (choice)
+		{
+			case 1: 
+				checkPrime();
+				break;			
+			
+			case 2:
+				processMinMaxDigit();
+				break;
+		}
+		
+		
+		
+	} while (choice != 3);
+	
+	
+	return 0;
+}
+
+
+void processMinMaxDigit() {
+	int n; // nếu người ta cà chớn không nhập vào đúng giá trị
+	do 
+	{
+		printf("Please input the number n > 9: ");
+		scanf("%d", &n);
+		
+		if (n <= 9)
+			printf("Please input the right number n > 9 to find the min max digit!!!");
+		
+	}	while (n <= 9);
+	
+	int min, max, a, q;
+	int t[10];
+	// bây giờ cần tách mỗi 1 chữ số ra 1 lần
+	// mình chia dư cho 10---> chỉ đúng khi số chỉ có 2 chữ số.
+	// làm sao để lấy được 1 chữ số đầu!!!
+	// so từng chữ số với nhau
+	// kí tự đầu tiên với kí tự cuối cùng
+	
+	printf("The digit of number n is: ");
+	for (int i = 0; i < 10; i++)
+	{
+		a = n % 10;
+		n /= 10;
+		t[i] = a;
+		q = i;
+		printf("%d ", t[i]);
+		if (n < 1)
+			break;
+	}
+
+	max = t[0];
+	min = t[0];
+	for (int i = 0; i <= q; i++)
+	{		
+		if (max < t[i])
+			max = t[i];
+		if (min > t[i])
+			min = t[i];
+	}
+	printf("\nThe maximum digit of the number is %d\n", max);
+	printf("The minimum digit of the number is %d\n", min);
+		
+}
+
+void checkPrime() {
+	
+	int n;
+	do 
+	{	
+	
+		printf("Please input the integer number n > 1: ");
+		scanf("%d", &n);
+					
+		if (n <= 1)
+			printf("\nPlease input the right integer number n > 1!!!!\n");
+				
+	} while (n <= 1);
+			
+				
+	if (isPrime(n))				// nếu như thằng trong if mà không có điều kiện gì cả thì mặc định if
+											// nó sẽ kiểm tra là đúng hay sai tức là 0 hoặc 1. nếu là 1 thì nó mới làm
+		printf("The number %d is a prime.\n\n\n", n);
+	else
+		printf("Sorry this number isn't a prime!!!\n\n\n");
+	
+}
+
+
+
+int isPrime(int n) {	
+	
+	int t = 1;
+	for (int i = 2; i <= sqrt(n); i++)
+		if (n % i == 0)
+			{
+				t = 0;					
+				return t;
+			}
+								
+	return t;
+	
+}
+
+
+void printMenu() {
+	printf("*========================================================================*\n");
+	printf("*	Welcome to our world to help you calculate some operation:	 *\n");
+	printf("*	1. Check if the integer number is a prime or not??	  	 *\n");
+	printf("*	2. Find a min and max digit in an integer number:		 *\n");
+	printf("*	3. Quit.					 	  	 *\n");
+	printf("*========================================================================*\n");
+	
+}
